@@ -112,3 +112,8 @@ class TestJSONCache(unittest.TestCase):
         self.cache['mykey'] = {'foo': 'bar'}
         filename = os.path.join(self.tempdir, 'mykey.json')
         self.assertEqual(os.stat(filename).st_mode & 0xFFF, 0o600)
+
+    def test_shorter_value(self):
+        self.cache['mykey'] = {'foo': 'bar'}
+        self.cache['mykey'] = {}
+        self.assertEqual(self.cache['mykey'], {})

@@ -79,7 +79,7 @@ class JSONFileCache(object):
         if not os.path.isdir(self._working_dir):
             os.makedirs(self._working_dir)
         with os.fdopen(os.open(full_key,
-                               os.O_WRONLY | os.O_CREAT, 0o600), 'w') as f:
+                               os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600), 'w') as f:
             f.write(file_content)
 
     def _convert_cache_key(self, cache_key):
